@@ -6,7 +6,7 @@
         <artifactId>stats</artifactId>
         <version>0.0.1</version>
     </parent>
-	<artifactId>common</artifactId>
+    <artifactId>common</artifactId>
 	<repositories>
         <repository>
             <id>platform-pe-releases</id>
@@ -17,6 +17,7 @@
 	</dependencies>
 
 	<build>
+        <finalName>${parent.groupId}-${parent.artifactId}-${artifactId}-${parent.version}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
