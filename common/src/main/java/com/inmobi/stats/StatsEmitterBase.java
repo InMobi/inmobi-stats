@@ -7,28 +7,22 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Properties;
 
-public class StatsEmitterBase implements StatsEmitter {
+public abstract class StatsEmitterBase implements StatsEmitter {
 
     protected List<StatsExposer> statsExposers = Collections.synchronizedList(new ArrayList<StatsExposer>());
 
-    public void add(StatsExposer s) {
+    @Override
+    public synchronized void add(StatsExposer s) {
         statsExposers.add(s);
     }
 
-    public void remove(StatsExposer s) {
-        int index = statsExposers.indexOf(s);
-        if (index < 0) {
-            statsExposers.remove(index);
-        }
+    @Override
+    public synchronized void remove(StatsExposer s) {
+        statsExposers.remove(s);
     }
 
     public boolean isEmpty() {
         return statsExposers.isEmpty();
     }
-
-    // Nothing to do in base
-    public void stop(){}
-    public void start(){}
-    public void init(Properties props){}
 
 }
