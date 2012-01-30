@@ -12,7 +12,5 @@ public interface StatsEmitter {
 
     public void remove(StatsExposer s);
 
-    public void start();
-
-    public void stop();
+    public void removeAll();
 }

@@ -9,7 +9,7 @@ import java.util.Properties;
 
 public abstract class StatsEmitterBase implements StatsEmitter {
 
-    protected List<StatsExposer> statsExposers = Collections.synchronizedList(new ArrayList<StatsExposer>());
+    protected List<StatsExposer> statsExposers = new ArrayList<StatsExposer>();
 
     @Override
     public synchronized void add(StatsExposer s) {
@@ -21,8 +21,12 @@ public abstract class StatsEmitterBase implements StatsEmitter {
         statsExposers.remove(s);
     }
 
-    public boolean isEmpty() {
-        return statsExposers.isEmpty();
+    @Override
+    public synchronized void removeAll() {
+        statsExposers.clear();
     }
 
+    protected boolean isEmpty() {
+        return statsExposers.isEmpty();
+    }
 }

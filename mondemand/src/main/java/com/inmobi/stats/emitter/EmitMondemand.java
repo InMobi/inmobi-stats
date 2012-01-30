@@ -34,7 +34,7 @@ public class EmitMondemand extends StatsEmitterBase implements Runnable {
         t = new Thread(this);
     }
 
-    public void start() {
+    protected void start() {
         if ((t != null) && !t.isAlive()) {
             should_run = true;
             t.start();
@@ -81,10 +81,30 @@ public class EmitMondemand extends StatsEmitterBase implements Runnable {
         }
     }
 
-    public void stop() {
-        if ((t != null) && t.isAlive() && isEmpty()) {
+    protected void stop() {
+        if ((t != null) && t.isAlive()) {
             should_run = false;
             t.interrupt();
         }
+    }
+
+    @Override
+    public synchronized void add(StatsExposer s) {
+        super(s);
+        start();
+    }
+
+    @Override
+    public synchronized void remove(StatsExposer s) {
+        super(s);
+        if (isEmpty()) {
+            stop();
+        }
+    }
+
+    @Override
+    public synchronized void removeAll() {
+        super(s);
+        stop();
     }
 }

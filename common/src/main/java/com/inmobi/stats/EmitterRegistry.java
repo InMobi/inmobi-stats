@@ -26,7 +26,6 @@ public class EmitterRegistry {
             if (className != null || className.length() == 0) {
                 emitter = (StatsEmitter) Class.forName(className).newInstance();
                 emitter.init(props);
-                emitter.start();
             } else {
                 throw new Exception("className property in \"" + config + "\" is either empty or not specified");
             }
@@ -40,7 +39,7 @@ public class EmitterRegistry {
 
     public static synchronized void remove(String config) {
         if (registry.containsKey(config)) {
-            registry.get(config).stop();
+            registry.get(config).removeAll();
             registry.remove(config);
         }
     }
@@ -48,7 +47,7 @@ public class EmitterRegistry {
     public static synchronized void removeAll() {
         Collection<StatsEmitter> se = (Collection<StatsEmitter>) registry.values();
         for (StatsEmitter s : se) {
-            s.stop();
+            s.removeAll();
         }
         registry.clear();
     }
