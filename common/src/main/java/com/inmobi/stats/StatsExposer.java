@@ -1,11 +1,11 @@
 package com.inmobi.stats;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public interface StatsExposer {
 
-    public HashMap<String, Number> getStats();
+    public Map<String, Number> getStats();
 
-    public HashMap<String, String> getContexts();
+    public Map<String, String> getContexts();
 
 }
