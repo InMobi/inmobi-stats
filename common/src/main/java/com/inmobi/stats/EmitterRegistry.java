@@ -2,10 +2,7 @@ package com.inmobi.stats;
 
 import com.inmobi.stats.StatsEmitter;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
-import java.util.Collections;
 import java.util.Collection;
 import java.util.Properties;
 import java.io.FileInputStream;
@@ -23,18 +20,15 @@ public class EmitterRegistry {
             props.load(new FileInputStream(config));
             String className = props.getProperty("className", null);
             StatsEmitter emitter = null;
-            if (className != null || className.length() == 0) {
+            if (className != null && className.length() > 0) {
                 emitter = (StatsEmitter) Class.forName(className).newInstance();
                 emitter.init(props);
             } else {
                 throw new Exception("className property in \"" + config + "\" is either empty or not specified");
             }
-            if (emitter != null) {
-                registry.put(config, emitter);
-                return emitter;
-            }
+            registry.put(config, emitter);
+            return emitter;
         }
-        return null;
     }
 
     public static synchronized void remove(String config) {

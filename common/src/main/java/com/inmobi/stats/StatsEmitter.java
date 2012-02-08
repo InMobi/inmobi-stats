@@ -1,7 +1,6 @@
 package com.inmobi.stats;
 
 import com.inmobi.stats.StatsExposer;
-import java.util.HashMap;
 import java.util.Properties;
 
 public interface StatsEmitter {

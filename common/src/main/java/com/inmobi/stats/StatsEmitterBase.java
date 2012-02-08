@@ -2,10 +2,8 @@ package com.inmobi.stats;
 
 import com.inmobi.stats.StatsEmitter;
 import com.inmobi.stats.StatsExposer;
-import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Properties;
 
 public abstract class StatsEmitterBase implements StatsEmitter {
 
