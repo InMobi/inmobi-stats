@@ -23,7 +23,9 @@ public class EmitMondemand extends StatsEmitterBase implements Runnable {
     private String hostname = null;
 
     public void init(Properties props) {
-        try { hostname = InetAddress.getLocalHost().getHostName(); } catch (Exception e) {}
+        try {
+            hostname = InetAddress.getLocalHost().getHostName();
+        } catch (Exception e) {}
         sleep = Integer.valueOf(props.getProperty("poll_interval", "10000"));
         client = new Client(props.getProperty("app_name", "sample_app"));
 
@@ -42,8 +44,8 @@ public class EmitMondemand extends StatsEmitterBase implements Runnable {
     }
 
     public void run() {
-        HashMap<String, Number> stats;
-        HashMap<String, String> contexts;
+        Map<String, Number> stats;
+        Map<String, String> contexts;
         while (should_run) {
             synchronized(statsExposers) {
                 for (StatsExposer exposer : statsExposers) {
@@ -60,15 +62,15 @@ public class EmitMondemand extends StatsEmitterBase implements Runnable {
                     stats = exposer.getStats();
                     contexts = exposer.getContexts();
 
-                    Iterator it = stats.entrySet().iterator();
+                    Iterator<Map.Entry<String,Number>> it = stats.entrySet().iterator();
                     while (it.hasNext()) {
-                        Map.Entry pair = (Map.Entry)it.next();
-                        client.setKey((String)pair.getKey(), ((Number)pair.getValue()).longValue());
+                        Map.Entry<String,Number> pair = it.next();
+                        client.setKey(pair.getKey(), (pair.getValue()).longValue());
                     }
-                    it = contexts.entrySet().iterator();
-                    while (it.hasNext()) {
-                        Map.Entry pair = (Map.Entry)it.next();
-                        client.addContext((String)pair.getKey(), (String)(pair.getValue() == null ? "" : pair.getValue()));
+                    Iterator<Map.Entry<String,String>> it1 = contexts.entrySet().iterator();
+                    while (it1.hasNext()) {
+                        Map.Entry<String,String> pair = it1.next();
+                        client.addContext(pair.getKey(), (pair.getValue() == null ? "" : pair.getValue()));
                     }
 
                     client.flushStats(true);
@@ -90,13 +92,13 @@ public class EmitMondemand extends StatsEmitterBase implements Runnable {
 
     @Override
     public synchronized void add(StatsExposer s) {
-        super(s);
+        super.add(s);
         start();
     }
 
     @Override
     public synchronized void remove(StatsExposer s) {
-        super(s);
+        super.remove(s);
         if (isEmpty()) {
             stop();
         }
@@ -104,7 +106,7 @@ public class EmitMondemand extends StatsEmitterBase implements Runnable {
 
     @Override
     public synchronized void removeAll() {
-        super(s);
+        super.removeAll();
         stop();
     }
 }
