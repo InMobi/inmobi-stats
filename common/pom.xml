@@ -8,10 +8,6 @@
     </parent>
     <artifactId>common</artifactId>
 	<repositories>
-        <repository>
-            <id>platform-pe-releases</id>
-            <url>http://build.corp.inmobi.com/nexus/content/repositories/platform-pe-releases</url>
-        </repository>
 	</repositories>
 	<dependencies>
 	</dependencies>
