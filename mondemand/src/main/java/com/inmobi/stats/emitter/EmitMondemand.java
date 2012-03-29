@@ -37,6 +37,9 @@ public class EmitMondemand extends StatsEmitterBase implements Runnable {
     }
 
     protected void start() {
+        if (t.getState() == Thread.State.TERMINATED) {
+            t = new Thread(this);
+        }
         if ((t != null) && !t.isAlive()) {
             should_run = true;
             t.start();
