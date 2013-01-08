@@ -31,6 +31,8 @@ public abstract class StatsEmitterBase implements StatsEmitter {
     }
 
     protected boolean isEmpty() {
-      return statsExposers.isEmpty();
+      synchronized (statsExposers) {
+        return statsExposers.isEmpty();
+      }
     }
 }
