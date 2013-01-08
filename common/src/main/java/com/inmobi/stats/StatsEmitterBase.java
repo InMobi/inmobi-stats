@@ -10,21 +10,29 @@ public abstract class StatsEmitterBase implements StatsEmitter {
     protected List<StatsExposer> statsExposers = new ArrayList<StatsExposer>();
 
     @Override
-    public synchronized void add(StatsExposer s) {
+    public void add(StatsExposer s) {
+      synchronized (statsExposers) {
         statsExposers.add(s);
+      }  
     }
 
     @Override
-    public synchronized void remove(StatsExposer s) {
+    public void remove(StatsExposer s) {
+      synchronized (statsExposers) {
         statsExposers.remove(s);
+      }
     }
 
     @Override
-    public synchronized void removeAll() {
+    public void removeAll() {
+      synchronized (statsExposers) {
         statsExposers.clear();
+      }
     }
 
     protected boolean isEmpty() {
+      synchronized (statsExposers) {
         return statsExposers.isEmpty();
+      }
     }
 }
