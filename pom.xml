@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.inmobi.stats</groupId>
 	<artifactId>parent</artifactId>
-	<version>0.0.4</version>
+	<version>0.0.5-SNAPSHOT</version>
   <packaging>pom</packaging>
   <scm>
     <connection>scm:git:git://github.com/InMobi/inmobi-stats</connection>
