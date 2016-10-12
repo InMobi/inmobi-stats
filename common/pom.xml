@@ -3,7 +3,7 @@
     <parent>
         <groupId>com.inmobi.stats</groupId>
         <artifactId>parent</artifactId>
-        <version>0.0.7-SNAPSHOT</version>
+        <version>0.0.7</version>
     </parent>
     <artifactId>common</artifactId>
 	<repositories>
